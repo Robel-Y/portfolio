@@ -78,6 +78,7 @@ body {
   position: relative;
   overflow: hidden; /* Hide overflow */
   padding: 1rem;
+ padding-inline-end: 70px;
   display: none;
   max-width: 100%;
   box-sizing: border-box;
