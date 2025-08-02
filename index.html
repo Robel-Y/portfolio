@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Robel Y. Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Hidden inputs for power and channel toggles -->
+  <input type="checkbox" id="power" hidden>
+  <input type="radio" name="channel" id="channel1" hidden checked>
+  <input type="radio" name="channel" id="channel2" hidden>
+  <input type="radio" name="channel" id="channel3" hidden>
+  <input type="radio" name="channel" id="channel4" hidden>
+  <input type="radio" name="channel" id="channel5" hidden>
+  <input type="radio" name="channel" id="channel6" hidden>
+  <input type="radio" name="channel" id="channel7" hidden>
+
+  <section class="crt-tv" role="region" aria-label="CRT TV Interface">
+
+    <!-- Antenna -->
+    <div class="tv-antenna" aria-hidden="true"></div>
+
+    <!-- Tooltips -->
+    <div class="tooltip power-tip">Click the power button 👉</div>
+    <div class="tooltip channel-tip"> Change the channel here 👉</div>
+
+    <!-- TV Screen -->
+    <main class="tv-screen">
+      <div class="scanlines" aria-hidden="true"></div>
+      <div class="flicker-overlay" aria-hidden="true"></div>
+      <div class="noise-overlay" aria-hidden="true"></div>
+
+      <!-- Channel 1 -->
+      <article class="screen-content" id="c1">
+        <h1 class="animated-text">ABOUT ME</h1>
+        <p>Hello! I'm <strong>Robel Yihelu</strong>, a Software Engineering student at Bahir Dar University. I'm learning full-stack development with the MERN stack and love building real-world projects.</p>
+      </article>
+
+      <!-- Channel 2 -->
+      <article class="screen-content" id="c2">
+        <h1 class="animated-text">SKILLS</h1>
+        <ul>
+          <li>HTML / CSS / JS (Learning)</li>
+          <li>React (Learning)</li>
+          <li>Node.js & Express (Learning)</li>
+          <li>MongoDB (Learning)</li>
+        </ul>
+      </article>
+
+      <!-- Channel 3 -->
+      <article class="screen-content" id="c3">
+        <h1 class="animated-text">EDUCATION</h1>
+        <p> Learning BSc in Software Engineering — Bahir Dar University<br /><a href="./pdf/CV.pdf" download>Download CV</a></p>
+      </article>
+
+      <!-- Channel 4 -->
+      <article class="screen-content" id="c4">
+        <h1 class="animated-text">INTERESTS</h1>
+        <p>AI & Automation<br />Full-Stack Development<br />UI/UX<br />Cloud Computing</p>
+      </article>
+
+      <!-- Channel 5 -->
+      <article class="screen-content" id="c5">
+        <h1 class="animated-text">PROJECTS</h1>
+        <ul>
+          <li> CRT Portfolio Site</li>
+         
+        </ul>
+      </article>
+
+      <!-- Channel 6 -->
+      <article class="screen-content" id="c6">
+        <h1 class="animated-text">CONTACT</h1>
+        <form action="#" method="POST" aria-label="Contact Form">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </article>
+
+      <!-- Channel 7 -->
+      <article class="screen-content" id="c7">
+        <h1 class="animated-text">LANGUAGES</h1>
+        <ul>
+          <li>JavaScript</li>
+          
+          <li>C++ (Basics)</li>
+        </ul>
+      </article>
+    </main>
+
+    <!-- Channel Navigation -->
+    <nav class="tv-controls" role="navigation" aria-label="Channel Navigation">
+      <label for="channel1" class="tv-button" aria-label="About">👤</label>
+      <label for="channel2" class="tv-button" aria-label="Skills">🛠️</label>
+      <label for="channel3" class="tv-button" aria-label="Education">🎓</label>
+      <label for="channel4" class="tv-button" aria-label="Interests">💡</label>
+      <label for="channel5" class="tv-button" aria-label="Projects">📁</label>
+      <label for="channel6" class="tv-button" aria-label="Contact">✉️</label>
+      <label for="channel7" class="tv-button" aria-label="Languages">💻</label>
+      <label for="power" class="tv-button power-button" aria-label="Power">⏻</label>
+    </nav>
+
+    <footer class="tv-brand" aria-label="Brand name">Robel TV</footer>
+  </section>
+
+</body>
+</html>

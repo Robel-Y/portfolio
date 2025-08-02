@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500&family=Press+Start+2P&display=swap');
+
+:root {
+  --primary-color: #6c5ce7;
+  --accent-color: #fd79a8;
+  --background-color: #2d3436;
+  --text-color: #f5f6fa;
+  --tv-border: #333;
+  --tv-inner: #111;
+  --tv-controls-bg: #222;
+  --button-bg: #444;
+  --button-hover: var(--primary-color);
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.crt-tv {
+  width: 90vw;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: var(--tv-inner);
+  border: 8px solid var(--tv-border);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+}
+
+/* Antenna */
+.tv-antenna {
+  position: absolute;
+  top: -80px; /* place antenna above the TV */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  z-index: 20;
+}
+
+.tv-antenna::before,
+.tv-antenna::after {
+  content: '';
+  position: absolute;
+  width: 5px;      /* thicker rods */
+  height: 80px;    /* taller rods */
+  background: #ccc;
+  top: 0;
+  border-radius: 2px; /* slight rounding for better look */
+}
+
+.tv-antenna::before {
+  left: -40px;      /* wider spread */
+  transform: rotate(-35deg);
+}
+
+.tv-antenna::after {
+  right: -40px;
+  transform: rotate(35deg);
+}
+
+
+
+/* TV Screen */
+.tv-screen {
+  flex: 1;
+  background: black;
+  position: relative;
+  overflow: hidden; /* Hide overflow */
+  padding: 1rem;
+  display: none;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#power:checked ~ .crt-tv .tv-screen {
+  display: block;
+}
+
+/* Channel Content */
+.screen-content {
+  display: none;
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+  filter: blur(3px);
+  opacity: 0.6;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+  animation: blurFade 1.5s ease-in-out;
+}
+#channel1:checked ~ .crt-tv .tv-screen #c1,
+#channel2:checked ~ .crt-tv .tv-screen #c2,
+#channel3:checked ~ .crt-tv .tv-screen #c3,
+#channel4:checked ~ .crt-tv .tv-screen #c4,
+#channel5:checked ~ .crt-tv .tv-screen #c5,
+#channel6:checked ~ .crt-tv .tv-screen #c6,
+#channel7:checked ~ .crt-tv .tv-screen #c7 {
+  display: block;
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* Controls */
+.tv-controls {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 60px;
+  background: var(--tv-controls-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 5px;
+  border-left: 2px solid #555;
+  z-index: 2;
+}
+.tv-button {
+  background: var(--button-bg);
+  color: var(--text-color);
+  font-size: 0.5rem;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  transition: background 0.3s, transform 0.3s;
+  width: 80%;
+  max-width: 40px;
+  text-align: center;
+}
+.tv-button:hover {
+  background: var(--button-hover);
+  transform: scale(1.1);
+}
+.power-button {
+  background-color: #ff0000;
+  margin-top: auto;
+  position: relative;
+  top: -20px;
+}
+.power-button:hover {
+  background-color: #ff4757;
+}
+
+/* Footer */
+.tv-brand {
+  width: 100%;
+  background: #222;
+  text-align: center;
+  padding: 6px 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  border-top: 2px solid #555;
+  user-select: none;
+}
+
+/* Screen effects */
+.scanlines {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.3) 1px, rgba(0, 0, 0, 0.3) 2px, rgba(0, 0, 0, 0) 3px);
+}
+.flicker-overlay {
+  animation: flicker 0.15s infinite alternate;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+.noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="none" /><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" /></svg>');
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes blurFade {
+  0% { filter: blur(3px); opacity: 0.3; }
+  50% { filter: blur(1.5px); opacity: 0.7; }
+  100% { filter: blur(0); opacity: 1; }
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink-caret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--accent-color); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Text animation */
+.animated-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  border-right: 2px solid var(--accent-color);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  margin-bottom: 1rem;
+}
+
+/* Form styling */
+input, textarea {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  background: #222;
+  border: 1px solid #555;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+button {
+  padding: 10px 20px;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  z-index: 10;
+  box-shadow: 0 0 6px var(--accent-color);
+  animation: fadeIn 1s ease-in-out;
+}
+.power-tip {
+  top: 92%;
+  right: 70px;
+}
+.channel-tip {
+  top: 28%;
+  right: 75px;
+  transform: translateY(-50%);
+}
+#power:checked ~ .crt-tv .power-tip,
+#power:checked ~ .crt-tv .channel-tip {
+  display: none;
+}
+
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .crt-tv {
+    height: 70vh;
+    aspect-ratio: auto;
+  }
+  .tv-button {
+    font-size: 0.65rem;
+    padding: 6px;
+  }
+}
